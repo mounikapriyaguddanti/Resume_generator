@@ -14,7 +14,7 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <h1 className='text-center pt-4'>Resume Builder</h1>
+      <h1 className='text-center pt-4'>Resume Generator</h1>
       <div className="content">
         {!showTemplate ? ( 
           <Form onSubmit={handleFormSubmit} />

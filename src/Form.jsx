@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import TemplatePage from './TemplatePage';
+import './Form.css';
 
 const Form = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
@@ -16,7 +17,12 @@ const Form = ({ onSubmit }) => {
     },
     skills: '',
     experience: '',
-    image: null 
+    image: null,
+    linkedin: '',
+    website: '',
+    twitter: '',
+    github: '',
+    languages: '',
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -31,11 +37,11 @@ const Form = ({ onSubmit }) => {
     const reader = new FileReader();
 
     reader.onloadend = () => {
-      setFormData({ ...formData, image: reader.result }); 
+      setFormData({ ...formData, image: reader.result });
     };
 
     if (file) {
-      reader.readAsDataURL(file); 
+      reader.readAsDataURL(file);
     }
   };
 
@@ -50,55 +56,112 @@ const Form = ({ onSubmit }) => {
       {submitted ? (
         <TemplatePage formData={formData} />
       ) : (
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="name">Name:</label>
-        <input type="text" className='form-control' name="name" value={formData.name} onChange={handleChange} /><br />
+        <form onSubmit={handleSubmit} className="resume-form">
+          {/* ... (rest of the form code) */}
+          <div className="form-section">
+            <h4>PERSONAL INFORMATION</h4>
+            <label htmlFor="name">Name:</label>
+            <input type="text" className="form-control" name="name" value={formData.name} onChange={handleChange} />
 
-        <label htmlFor="profile">Profile:</label>
-        <textarea name="profile" id="profile" className='form-control' cols="30" rows="3" value={formData.profile} onChange={handleChange}></textarea><br />
+            <label htmlFor="phno">Contact Number:</label>
+            <input type="tel" className="form-control" name="phno" value={formData.phno} onChange={handleChange} />
 
-        <label htmlFor="email">Email:</label>
-        <input type="email" className='form-control' name="email" value={formData.email} onChange={handleChange}  /><br />
+            <label htmlFor="email">Email:</label>
+            <input type="email" className="form-control" name="email" value={formData.email} onChange={handleChange} />
 
-        <label htmlFor="phno">Contact Number:</label>
-        <input type="tel" className='form-control' name="phno" value={formData.phno} onChange={handleChange}  /><br />
+            <label htmlFor="address">Address:</label>
+            <input type="text" className="form-control" name="address" value={formData.address} onChange={handleChange} />
 
-        <label htmlFor="address">Address:</label>
-        <input type="text" className='form-control' name="address" value={formData.address} onChange={handleChange}  /><br />
+            <label htmlFor="image">Upload Image:</label>
+            <input
+              type="file"
+              id="image"
+              className="form-control"
+              name="image"
+              accept="image/*"
+              onChange={handleImageChange}
+              required
+            />
 
-        <label htmlFor="education-degree">Education Degree:</label>
-        <input type="text" className='form-control' name="education-degree" value={formData.education.degree} onChange={(e) => setFormData({ ...formData, education: { ...formData.education, degree: e.target.value } })}  /><br />
+            <h4>SOCIAL LINKS</h4>
+            <label htmlFor="linkedin">LinkedIn:</label>
+            <input type="text" className="form-control" name="linkedin" value={formData.linkedin} onChange={handleChange} />
 
-        <label htmlFor="education-university">University Name:</label>
-        <input type="text" className='form-control' name="education-university" value={formData.education.university} onChange={(e) => setFormData({ ...formData, education: { ...formData.education, university: e.target.value } })}  /><br />
+            <label htmlFor="website">Website:</label>
+            <input type="text" className="form-control" name="website" value={formData.website} onChange={handleChange} />
 
-        <label htmlFor="education-college">College Name:</label>
-        <input type="text" className='form-control' name="education-college" value={formData.education.clgname} onChange={(e) => setFormData({ ...formData, education: { ...formData.education, clgname: e.target.value } })}  /><br />
+            <label htmlFor="twitter">Twitter:</label>
+            <input type="text" className="form-control" name="twitter" value={formData.twitter} onChange={handleChange} />
 
-        <label htmlFor="education-duration">Duration of Course:</label>
-        <input type="text" className='form-control' name="education-duration" value={formData.education.duration} onChange={(e) => setFormData({ ...formData, education: { ...formData.education, duration: e.target.value } })}  /><br />
+            <label htmlFor="github">GitHub:</label>
+            <input type="text" className="form-control" name="github" value={formData.github} onChange={handleChange} />
 
-        <label htmlFor="skills">Skills:</label>
-        <input type="text" className='form-control' name="skills" value={formData.skills} onChange={handleChange}  /><br />
+            <label htmlFor="languages">Languages:</label>
+            <input type="text" className="form-control" name="languages" value={formData.languages} onChange={handleChange} />
+          </div>
 
-        <label htmlFor="experience">Experience:</label>
-        <input type="text" className='form-control' name="experience" value={formData.experience} onChange={handleChange}  /><br />
+          <div className="form-section">
+            <h4>PROFESSIONAL INFORMATION</h4>
+            <label htmlFor="profile">Profile:</label>
+            <textarea
+              name="profile"
+              id="profile"
+              className="form-control"
+              cols="30"
+              rows="3"
+              value={formData.profile}
+              onChange={handleChange}
+            ></textarea>
 
-          <label htmlFor="image">Upload Image:</label>
-          <input
-            type="file"
-            id="image"
-            className="form-control"
-            name="image"
-            accept="image/*"
-            onChange={handleImageChange} // Call handleImageChange for image uploads
-            required
-          /><br />
+            <label htmlFor="education-degree">Education Degree:</label>
+            <input
+              type="text"
+              className="form-control"
+              name="education-degree"
+              value={formData.education.degree}
+              onChange={(e) => setFormData({ ...formData, education: { ...formData.education, degree: e.target.value } })}
+            />
+
+            <label htmlFor="education-university">University Name:</label>
+            <input
+              type="text"
+              className="form-control"
+              name="education-university"
+              value={formData.education.university}
+              onChange={(e) => setFormData({ ...formData, education: { ...formData.education, university: e.target.value } })}
+            />
+
+            <label htmlFor="education-college">College Name:</label>
+            <input
+              type="text"
+              className="form-control"
+              name="education-college"
+              value={formData.education.clgname}
+              onChange={(e) => setFormData({ ...formData, education: { ...formData.education, clgname: e.target.value } })}
+            />
+
+            <label htmlFor="education-duration">Duration of Course:</label>
+            <input
+              type="text"
+              className="form-control"
+              name="education-duration"
+              value={formData.education.duration}
+              onChange={(e) => setFormData({ ...formData, education: { ...formData.education, duration: e.target.value } })}
+            />
+
+            <label htmlFor="skills">Skills:</label>
+            <input type="text" className="form-control" name="skills" value={formData.skills} onChange={handleChange} />
+
+            <label htmlFor="experience">Experience:</label>
+            <input type="text" className="form-control" name="experience" value={formData.experience} onChange={handleChange} />
+          </div>
+
           <div className="d-flex justify-content-center">
             <button type="submit" className="btn btn-success">
-              Submit
+            Generate
             </button>
           </div>
+
         </form>
       )}
     </div>

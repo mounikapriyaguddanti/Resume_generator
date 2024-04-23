@@ -7,7 +7,9 @@
 }
 
 .app-container{
-  background-image: linear-gradient(to right, #FEADA6, #F5EFEF);
+  background: linear-gradient(#95d9f4,#fac5d2);
+/*
+  background-image: linear-gradient(to right, #FEADA6, #F5EFEF);*/
 }
 
 .content{
